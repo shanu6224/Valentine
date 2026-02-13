@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    color:white;
+    overflow:hidden;
+}
+
+.page{
+    display:none;
+    padding:30px 20px;
+    min-height:100vh;
+    box-sizing:border-box;
+}
+
+.show{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+h1{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+p{
+    font-size:17px;
+    line-height:1.6;
+    max-width:350px;
+}
+
+input{
+    padding:12px;
+    border-radius:25px;
+    border:none;
+    width:80%;
+    max-width:250px;
+    font-size:16px;
+    text-align:center;
+}
+
+button{
+    padding:14px 25px;
+    border-radius:30px;
+    border:none;
+    font-size:18px;
+    margin:12px;
+    cursor:pointer;
+    min-width:120px;
+}
+
+#yes{
+    background:white;
+    color:#ff4e8a;
+}
+
+#no{
+    background:#ff4e8a;
+    color:white;
+    position:fixed;
+}
+
+.nextBtn{
+    background:white;
+    color:#ff4e8a;
+}
+
+.heart{
+    position:fixed;
+    animation:float 4s linear infinite;
+}
+
+@keyframes float{
+    from{ transform:translateY(100vh); opacity:1; }
+    to{ transform:translateY(-10vh); opacity:0; }
+}
+
+.confetti{
+    position:fixed;
+    width:8px;
+    height:8px;
+    animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+    from{ transform:translateY(-10vh); }
+    to{ transform:translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD PAGE -->
+<div id="passwordPage" class="page show">
+    <h1>Enter Our Secret Password 🔐</h1>
+    <input type="password" id="password" placeholder="Our Special Word">
+    <br><br>
+    <button onclick="checkPassword()">Unlock 💖</button>
+</div>
+
+<!-- VALENTINE PAGE -->
+<div id="valentinePage" class="page">
+    <h1>Will You Be My Valentine? 💘</h1>
+    <button id="yes">YES 💖</button>
+    <button id="no">NO 😜</button>
+</div>
+
+<!-- SURPRISE 1 – LOVE LETTER -->
+<div id="surprise1" class="page">
+    <h1>For You 💌</h1>
+    <p>
+    Hey love ❤️ <br><br>
+    I just want you to know how special you are to me.  
+    You are my peace, my happiness, and my favorite notification 🥰  
+    No matter the distance, my heart always feels closest to you.  
+    Thank you for being mine and letting me be yours 💖
+    </p>
+    <button class="nextBtn" onclick="nextPage('surprise2')">Next ➡</button>
+</div>
+
+<!-- SURPRISE 2 – MEMORIES -->
+<div id="surprise2" class="page">
+    <h1>Our Beautiful Journey ✨</h1>
+    <p>
+    From our school days in 11th and 12th…  
+    to becoming long-distance…  
+    to finally meeting after such a long time 🥹💞  
+    Every phase of us has been special.  
+    We may be miles apart sometimes,  
+    but our hearts have never been distant ❤️
+    </p>
+    <button class="nextBtn" onclick="nextPage('surprise3')">Final Surprise ➡</button>
+</div>
+
+<!-- SURPRISE 3 – FUTURE -->
+<div id="surprise3" class="page">
+    <h1>Our Forever Starts Here 💍</h1>
+    <p>
+    This is not just about today…  
+    It’s about every tomorrow with you.  
+    More memories. More laughter. More love.  
+    And one day… no more distance.  
+    Just us. Always. ❤️✨
+    </p>
+</div>
+
+<script>
+
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
+    document.getElementById(id).classList.add("show");
+}
+
+function nextPage(id){
+    showPage(id);
+}
+
+function checkPassword(){
+    let pass=document.getElementById("password").value;
+    if(pass==="mylove"){  // CHANGE PASSWORD HERE
+        showPage("valentinePage");
+    }else{
+        alert("Wrong password 😜");
+    }
+}
+
+const noBtn=document.getElementById("no");
+
+function moveNo(){
+    const maxX=window.innerWidth-120;
+    const maxY=window.innerHeight-60;
+    noBtn.style.left=Math.random()*maxX+"px";
+    noBtn.style.top=Math.random()*maxY+"px";
+}
+
+noBtn.addEventListener("touchstart",moveNo);
+noBtn.addEventListener("mouseover",moveNo);
+
+document.getElementById("yes").addEventListener("click",function(){
+    showPage("surprise1");
+    createHearts();
+    createConfetti();
+});
+
+function createHearts(){
+    for(let i=0;i<25;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="💖";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(20+Math.random()*20)+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    }
+}
+
+function createConfetti(){
+    for(let i=0;i<60;i++){
+        let conf=document.createElement("div");
+        conf.className="confetti";
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.backgroundColor=
+        ["#fff","#ff4e8a","#ffd1dc","#ff99cc"][Math.floor(Math.random()*4)];
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),3000);
+    }
+}
+
+</script>
+
+</body>
+</html>
