@@ -9,7 +9,7 @@ body{
     margin:0;
     font-family: Arial, sans-serif;
     text-align:center;
-    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    background: linear-gradient(135deg,#ff4e8a,#ff9a9e);
     color:white;
     overflow:hidden;
 }
@@ -28,74 +28,77 @@ body{
     align-items:center;
 }
 
-h1{
-    font-size:24px;
-    margin-bottom:20px;
-}
-
-p{
-    font-size:17px;
-    line-height:1.6;
-    max-width:350px;
-}
-
 input{
-    padding:12px;
-    border-radius:25px;
+    padding:10px;
+    border-radius:20px;
     border:none;
-    width:80%;
-    max-width:250px;
-    font-size:16px;
     text-align:center;
+    margin:10px;
 }
 
 button{
-    padding:14px 25px;
-    border-radius:30px;
+    padding:10px 20px;
+    border-radius:25px;
     border:none;
-    font-size:18px;
-    margin:12px;
+    font-size:15px;
+    margin:8px;
     cursor:pointer;
-    min-width:120px;
 }
 
-#yes{
+.option{
     background:white;
     color:#ff4e8a;
+    width:220px;
 }
 
-#no{
-    background:#ff4e8a;
-    color:white;
-    position:fixed;
+.teddy{
+    font-size:60px;
+    animation:bounce 1s infinite alternate;
 }
 
-.nextBtn{
-    background:white;
-    color:#ff4e8a;
+@keyframes bounce{
+    from{ transform:translateY(0); }
+    to{ transform:translateY(-15px); }
 }
 
+/* HEART RAIN */
 .heart{
     position:fixed;
-    animation:float 4s linear infinite;
-}
-
-@keyframes float{
-    from{ transform:translateY(100vh); opacity:1; }
-    to{ transform:translateY(-10vh); opacity:0; }
-}
-
-.confetti{
-    position:fixed;
-    width:8px;
-    height:8px;
-    animation:fall 3s linear forwards;
+    top:-10px;
+    font-size:20px;
+    animation:fall linear forwards;
 }
 
 @keyframes fall{
-    from{ transform:translateY(-10vh); }
-    to{ transform:translateY(100vh); }
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
 }
+
+/* RING POP */
+@keyframes pop{
+    0%{transform:scale(0);}
+    100%{transform:scale(1);}
+}
+
+.ring{
+    font-size:90px;
+    animation:pop 0.5s ease-in-out;
+}
+
+/* FIREWORKS */
+.firework{
+    position:fixed;
+    font-size:25px;
+    animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+    0%{ transform:scale(0); opacity:1; }
+    100%{ transform:scale(3); opacity:0; }
+}
+
 </style>
 </head>
 
@@ -103,119 +106,165 @@ button{
 
 <!-- PASSWORD PAGE -->
 <div id="passwordPage" class="page show">
-    <h1>Enter Our Secret Password 🔐</h1>
-    <input type="password" id="password" placeholder="Our Special Word">
-    <br><br>
+    <h1>Enter Secret Password 🔐</h1>
+    <input type="password" id="passwordInput" placeholder="Enter password">
+    <br>
     <button onclick="checkPassword()">Unlock 💖</button>
 </div>
 
+<!-- START PAGE -->
+<div id="startPage" class="page">
+    <h1>Welcome My Love 💖</h1>
+    <button onclick="showPage('letterPage')">Open My Heart 💌</button>
+</div>
+
+<!-- LOVE LETTER -->
+<div id="letterPage" class="page">
+    <h1>To My Long Distance Love 💕</h1>
+    <p style="max-width:320px">
+    Our story started as long distance…  
+    Just two hearts connected through Instagram 💌  
+
+    Sometimes I got irritated…  
+    Sometimes I didn’t understand you…  
+    Sometimes distance felt too much…  
+
+    But no matter what,  
+    I always loved you truly.  
+
+    Even through fights.  
+    Even through misunderstandings.  
+    Even through miles between us.  
+
+    I promise to understand you more.  
+    I promise to love you louder than arguments.  
+    I promise to stay forever.  
+
+    Because my love is real. ❤️
+    </p>
+    <button onclick="showPage('quizPage')">Test Your Love 😏</button>
+</div>
+
+<!-- QUIZ PAGE -->
+<div id="quizPage" class="page">
+    <h1>Love Matching Game 💘</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+</div>
+
 <!-- VALENTINE PAGE -->
-<div id="valentinePage" class="page">
-    <h1>Will You Be My Valentine? 💘</h1>
-    <button id="yes">YES 💖</button>
-    <button id="no">NO 😜</button>
+<div id="finalPage" class="page">
+    <div class="teddy">🧸</div>
+    <h1>Will You Be My Valentine? 💖</h1>
+    <button class="option" onclick="sayYes()">Yes 💍</button>
+    <button class="option" id="noBtn" onclick="sayNo()">No 😏</button>
 </div>
 
-<!-- SURPRISE 1 – LOVE LETTER -->
-<div id="surprise1" class="page">
-    <h1>For You 💌</h1>
+<!-- YES PAGE -->
+<div id="yesPage" class="page">
+    <h1>Oh My Goddd 😍💖</h1>
+    <h2>You Said YESSSS!!! 💍</h2>
     <p>
-    Hey love ❤️ <br><br>
-    I just want you to know how special you are to me.  
-    You are my peace, my happiness, and my favorite notification 🥰  
-    No matter the distance, my heart always feels closest to you.  
-    Thank you for being mine and letting me be yours 💖
+    I want to be your Valentine forever ❤️  
+    I love youuu sooo muchhh 💕✨
     </p>
-    <button class="nextBtn" onclick="nextPage('surprise2')">Next ➡</button>
-</div>
-
-<!-- SURPRISE 2 – MEMORIES -->
-<div id="surprise2" class="page">
-    <h1>Our Beautiful Journey ✨</h1>
-    <p>
-    From our school days in 11th and 12th…  
-    to becoming long-distance…  
-    to finally meeting after such a long time 🥹💞  
-    Every phase of us has been special.  
-    We may be miles apart sometimes,  
-    but our hearts have never been distant ❤️
-    </p>
-    <button class="nextBtn" onclick="nextPage('surprise3')">Final Surprise ➡</button>
-</div>
-
-<!-- SURPRISE 3 – FUTURE -->
-<div id="surprise3" class="page">
-    <h1>Our Forever Starts Here 💍</h1>
-    <p>
-    This is not just about today…  
-    It’s about every tomorrow with you.  
-    More memories. More laughter. More love.  
-    And one day… no more distance.  
-    Just us. Always. ❤️✨
-    </p>
+    <div class="ring">💍</div>
 </div>
 
 <script>
 
+/* CHANGE PASSWORD HERE */
+const correctPassword = "foreverus";
+
+/* HEART RAIN */
+setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(2+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+},300);
+
+/* PAGE SWITCH */
 function showPage(id){
     document.querySelectorAll(".page").forEach(p=>p.classList.remove("show"));
     document.getElementById(id).classList.add("show");
 }
 
-function nextPage(id){
-    showPage(id);
-}
-
+/* PASSWORD CHECK */
 function checkPassword(){
-    let pass=document.getElementById("password").value;
-    if(pass==="mylove"){  // CHANGE PASSWORD HERE
-        showPage("valentinePage");
+    let input=document.getElementById("passwordInput").value;
+    if(input === correctPassword){
+        showPage("startPage");
     }else{
-        alert("Wrong password 😜");
+        alert("Wrong password 😏 Try again my love!");
     }
 }
 
-const noBtn=document.getElementById("no");
+/* QUIZ QUESTIONS */
+let questions=[
+{ q:"When did our chat start?", options:["19/10/24","23/10/24"], answer:"19/10/24"},
+{ q:"Our proposal day?", options:["23/10/24","27/05/25"], answer:"23/10/24"},
+{ q:"Our first meeting day?", options:["27/05/25","19/10/24"], answer:"27/05/25"},
+{ q:"My favourite food?", options:["Parotta & Biriyani","Pizza"], answer:"Parotta & Biriyani"},
+{ q:"Most lovable, cute, understanding, beautiful girl?", options:["Priya 😌","Oh you have no choice 😏"], answer:"Priya 😌"}
+];
 
-function moveNo(){
-    const maxX=window.innerWidth-120;
-    const maxY=window.innerHeight-60;
-    noBtn.style.left=Math.random()*maxX+"px";
-    noBtn.style.top=Math.random()*maxY+"px";
+let current=0;
+
+function loadQuestion(){
+    let q=questions[current];
+    document.getElementById("question").innerHTML="<h3>"+q.q+"</h3>";
+    let opts="";
+    q.options.forEach(opt=>{
+        opts+=`<button class="option" onclick="checkAnswer('${opt}')">${opt}</button>`;
+    });
+    document.getElementById("options").innerHTML=opts;
 }
 
-noBtn.addEventListener("touchstart",moveNo);
-noBtn.addEventListener("mouseover",moveNo);
-
-document.getElementById("yes").addEventListener("click",function(){
-    showPage("surprise1");
-    createHearts();
-    createConfetti();
-});
-
-function createHearts(){
-    for(let i=0;i<25;i++){
-        let heart=document.createElement("div");
-        heart.className="heart";
-        heart.innerHTML="💖";
-        heart.style.left=Math.random()*100+"vw";
-        heart.style.fontSize=(20+Math.random()*20)+"px";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),4000);
+function checkAnswer(selected){
+    if(selected===questions[current].answer){
+        alert("Correct 😍 Good boy!");
+        current++;
+        if(current<questions.length){
+            loadQuestion();
+        }else{
+            showPage("finalPage");
+        }
+    }else{
+        alert("Oh no 😤 Wrong answer! I'm little angry now 😏 Try again!");
     }
 }
 
-function createConfetti(){
-    for(let i=0;i<60;i++){
-        let conf=document.createElement("div");
-        conf.className="confetti";
-        conf.style.left=Math.random()*100+"vw";
-        conf.style.backgroundColor=
-        ["#fff","#ff4e8a","#ffd1dc","#ff99cc"][Math.floor(Math.random()*4)];
-        document.body.appendChild(conf);
-        setTimeout(()=>conf.remove(),3000);
+function sayYes(){
+    showPage("yesPage");
+    launchFireworks();
+}
+
+function sayNo(){
+    alert("Oh really? 😏 Think again mister!");
+    let noBtn=document.getElementById("noBtn");
+    noBtn.style.position="absolute";
+    noBtn.style.left=Math.random()*80+"vw";
+    noBtn.style.top=Math.random()*80+"vh";
+}
+
+/* FIREWORKS */
+function launchFireworks(){
+    for(let i=0;i<30;i++){
+        let fire=document.createElement("div");
+        fire.className="firework";
+        fire.innerHTML="✨";
+        fire.style.left=Math.random()*100+"vw";
+        fire.style.top=Math.random()*100+"vh";
+        document.body.appendChild(fire);
+        setTimeout(()=>fire.remove(),1000);
     }
 }
+
+loadQuestion();
 
 </script>
 
